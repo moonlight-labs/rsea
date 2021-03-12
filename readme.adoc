@@ -2,6 +2,10 @@
 
 ### INSTALL
 
+```bash
+gem install rsea
+```
+
 ### USAGE
 
 To convert a folder into a self-extracting archive:
@@ -32,10 +36,15 @@ ruby <archive_file> <optional_dest_folder>
 
 Want to contribute to a nifty little open source project? There are a few enhancements that could be made with just a couple lines of code
 
-- Binary file detection without `mimemagic`
-- Gemify this
-- Allow explicit list of files as input instead of folder only
-- Enable file permissions & ownership flags
-- Document interpolation possibilities
-- Tests could be nice
-- Cross-platform executable?
+- [ ] Binary file detection without `mimemagic`
+- [x] Gemify this
+- [ ] Allow explicit list of files as input instead of folder only
+- [ ] Enable file permissions & ownership flags
+- [ ] Document interpolation possibilities
+- [ ] Tests would be nice
+- [ ] Cross-platform executable?
+
+
+### CHANGES
+
+- Mar 11 2021 - 0.1.0 released
