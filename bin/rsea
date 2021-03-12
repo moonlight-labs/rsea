@@ -40,6 +40,12 @@ $help = <<~HELP
 
   USAGE
     rsea <folder>
+    rsea <folder> > myarchive.sar.rb
+
+  TO EXTRACT
+    ruby myarchive.sar.rb
+
+
 HELP
 
 $code = <<~EOF
