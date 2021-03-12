@@ -1,0 +1,29 @@
+# https://taskfile.org
+
+version: '3'
+
+tasks:
+  publish:
+    cmds: 
+      - task: build
+      - task: install
+      - task: push
+
+  build:
+    cmds:
+      - rm *.gem
+      - gem build rsea.gemspec
+
+  install:
+    vars:
+      GEMFILE: 
+        sh: find . -maxdepth 1 -type f -iname "*.gem" -maxdepth 1 -print -quit
+    cmds:
+      - gem install {{.GEMFILE}}
+
+  push:
+    vars:
+      GEMFILE: 
+        sh: find . -maxdepth 1 -type f -iname "*.gem" -maxdepth 1 -print -quit
+    cmds:
+      - gem push {{.GEMFILE}}

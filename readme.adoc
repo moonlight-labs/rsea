@@ -11,7 +11,7 @@ gem install rsea
 To convert a folder into a self-extracting archive:
 
 ```bash
-# creates a archive file
+# creates an archive file
 rsea <src_folder> > <target_archive_file>
 
 # outputs the archive to STDOUT
@@ -23,6 +23,30 @@ To extract the archive:
 ```bash
 ruby <archive_file> <optional_dest_folder>
 ```
+
+### EXAMPLE
+```bash
+
+# Create the archive
+> rsea ./test > myarchive.sar.rb
+
+# Extract the archive into a tmp folder
+> ruby myarchive.sar.rb ./tmp 
+
+```
+
+### RATIONALE
+
+What is the point of this?  Doesn't `tar`, `shar`, `zip`, `stamp` and a whole slew of other archiving utilies provide everything one might want?
+
+Maybe not! RSEA has a unique mix of features that can be useful in certain situations. 
+
+The archive format is a human readable and maybe human editable text file. This makes visual inspection super easy and allows one to make small adjustments. Since the archive IS Ruby, you also have the ability to do some interesting tricks with string interpolation. For example, you could use the format as a templating system that dynamically integrates some user options at extraction time. You could also augment the archive with some pre or post-processing, if for instance you were using it as an application installer.
+
+It's also cross-platform. Ruby is readily available on all major operating systems. Archive on Linux, extract on Windows. No problem.
+
+It supports text and binary files. It guesses file type based on extension and defaults to binary when none is provided. Binary files are base64 encoded so they travel easily.
+
 
 ### FEATURES
 
