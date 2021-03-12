@@ -18,7 +18,7 @@ def encode(folder)
     file_path = Pathname.new(File.expand_path(f))
     rel_path  = file_path.relative_path_from(root)
 
-    text = MimeMagic.by_path(f).text?
+    text = MimeMagic.by_path(f)&.text? || false # assume binary if no extension
 
     print text ? 't' : 'b'
     puts " '#{rel_path}',"
