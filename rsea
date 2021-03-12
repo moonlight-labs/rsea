@@ -1,0 +1,65 @@
+#!/usr/bin/env ruby
+
+# Ruby Self-Extracting Archive
+
+require 'mimemagic'
+require 'base64'
+require 'pathname'
+
+def encode(folder)
+
+  puts $code
+
+  root  = Pathname.new(File.expand_path(folder))
+
+  Dir.glob(File.join(folder, '**', '*')).each do |f|
+    next if File.directory?(f)
+
+    file_path = Pathname.new(File.expand_path(f))
+    rel_path  = file_path.relative_path_from(root)
+
+    text = MimeMagic.by_path(f).text?
+
+    print text ? 't' : 'b'
+    puts " '#{rel_path}',"
+    puts '<<-EOF'
+    puts text ? File.read(f) : Base64.encode64(File.read(f))
+    puts "EOF\n\n"
+  end
+end
+
+def main()
+  abort $help unless ARGV[0]
+  abort 'Error: First param must be a folder' unless File.directory?(ARGV[0])
+
+  encode(ARGV[0])
+end
+
+$help = <<~HELP
+  RSEA: Ruby Self-Extracting Archive
+
+  USAGE
+    rsea <folder>
+HELP
+
+$code = <<~EOF
+  require 'fileutils'
+  require 'base64'
+
+  def d(filepath)
+    return filepath unless ARGV[0]
+    File.join(ARGV[0], filepath)
+  end
+
+  def t(filepath, contents)
+    FileUtils.mkdir_p File.dirname(d(filepath))
+    File.write(d(filepath), contents)
+  end
+
+  def b(filepath, contents)
+    t(filepath, Base64.decode64(contents))
+  end
+
+EOF
+
+main

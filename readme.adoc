@@ -1,0 +1,41 @@
+## RSEA - Ruby Self-Extracting Archive
+
+### INSTALL
+
+### USAGE
+
+To convert a folder into a self-extracting archive:
+
+```bash
+# creates a archive file
+rsea <src_folder> > <target_archive_file>
+
+# outputs the archive to STDOUT
+rsea <src_folder> 
+```
+
+To extract the archive:
+
+```bash
+ruby <archive_file> <optional_dest_folder>
+```
+
+### FEATURES
+
+- Human readable archive format
+- Human editable metadata
+- Handles text AND binary files
+- Works on Linux, Ruby, Windows, etc
+- Single dependency: ruby
+
+### ROADMAP
+
+Want to contribute to a nifty little open source project? There are a few enhancements that could be made with just a couple lines of code
+
+- Binary file detection without `mimemagic`
+- Gemify this
+- Allow explicit list of files as input instead of folder only
+- Enable file permissions & ownership flags
+- Document interpolation possibilities
+- Tests could be nice
+- Cross-platform executable?
